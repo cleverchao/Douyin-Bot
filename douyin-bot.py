@@ -79,7 +79,7 @@ def next_page():
         duration=200
     )
     adb.run(cmd)
-    time.sleep(1.5)
+    time.sleep(0.1)
 
 
 def follow_user():
@@ -92,7 +92,7 @@ def follow_user():
         y=config['follow_bottom']['y'] + _random_bias(10)
     )
     adb.run(cmd)
-    time.sleep(0.5)
+    time.sleep(0.1)
 
 
 def thumbs_up():
@@ -105,7 +105,7 @@ def thumbs_up():
         y=config['star_bottom']['y'] + _random_bias(10)
     )
     adb.run(cmd)
-    time.sleep(0.5)
+    time.sleep(0.1)
 
 
 def main():
