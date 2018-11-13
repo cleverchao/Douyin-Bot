@@ -46,10 +46,10 @@ class AiPlat(object):
             return {'ret': -1}
 
     def face_detectface(self, image, mode):
-        self.url = url_preffix + 'face/face_detectface'
+        self.url = url_preffix + 'vision/vision_porn'
         setParams(self.data, 'app_id', self.app_id)
         setParams(self.data, 'app_key', self.app_key)
-        setParams(self.data, 'mode', mode)
+        # setParams(self.data, 'mode', mode)
         setParams(self.data, 'time_stamp', int(time.time()))
         setParams(self.data, 'nonce_str', int(time.time()))
         image_data = base64.b64encode(image)

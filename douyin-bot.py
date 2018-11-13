@@ -23,8 +23,8 @@ VERSION = "0.0.1"
 
 # 我申请的 Key，随便用，嘻嘻嘻
 # 申请地址 http://ai.qq.com
-AppID = '1106858595'
-AppKey = 'bNUNgOpY6AeeJjFu'
+AppID = '2109711349'
+AppKey = 'w3VKg59cxnxugTMD'
 
 DEBUG_SWITCH = True
 FACE_PATH = 'face/'
@@ -116,52 +116,34 @@ def main():
     print('程序版本号：{}'.format(VERSION))
     print('激活窗口并按 CONTROL + C 组合键退出')
     debug.dump_device_info()
-    screenshot.check_screenshot()
+    # screenshot.check_screenshot()
 
     while True:
         next_page()
+        time.sleep(0.1)
+        thumbs_up()
+        # screenshot.pull_screenshot()
 
-        time.sleep(1)
-        screenshot.pull_screenshot()
+        # resize_image('autojump.png', 'optimized.png', 1024*1024)
 
-        resize_image('autojump.png', 'optimized.png', 1024*1024)
+        # with open('optimized.png', 'rb') as bin_data:
+        #     image_data = bin_data.read()
 
-        with open('optimized.png', 'rb') as bin_data:
-            image_data = bin_data.read()
+        # ai_obj = apiutil.AiPlat(AppID, AppKey)
+        # rsp = ai_obj.face_detectface(image_data, 0)
 
-        ai_obj = apiutil.AiPlat(AppID, AppKey)
-        rsp = ai_obj.face_detectface(image_data, 0)
 
-        major_total = 0
-        minor_total = 0
-
-        if rsp['ret'] == 0:
-            beauty = 0
-            for face in rsp['data']['face_list']:
-                print(face)
-                face_area = (face['x'], face['y'], face['x']+face['width'], face['y']+face['height'])
-                print(face_area)
-                img = Image.open("optimized.png")
-                cropped_img = img.crop(face_area).convert('RGB')
-                cropped_img.save(FACE_PATH + face['face_id'] + '.png')
-                # 性别判断
-                if face['beauty'] > beauty and face['gender'] < 50:
-                    beauty = face['beauty']
-
-                if face['age'] > GIRL_MIN_AGE:
-                    major_total += 1
-                else:
-                    minor_total += 1
-
-            # 是个美人儿~关注点赞走一波
-            if beauty > BEAUTY_THRESHOLD and major_total > minor_total:
-                print('发现漂亮妹子！！！')
-                thumbs_up()
-                follow_user()
-
-        else:
-            print(rsp)
-            continue
+        # if rsp['ret'] == 0:
+        #     for tag in rsp['data']['tag_list']:
+        #         if tag['tag_name'] == 'hot' or tag['tag_name'] == 'porn':
+        #             if tag['tag_confidence'] > 75:
+        #                 print(tag)
+        #                 print('发现性感妹子！！！') 
+                        # thumbs_up()
+        #                 follow_user()
+        # else:
+        #     print(rsp)
+        #     continue
 
 
 if __name__ == '__main__':
